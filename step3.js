@@ -11,19 +11,21 @@ async function webCat(url) {
   return res.data;
 }
 
-function determineAndCat(str) {
-
-  if (fs.existsSync(str)) {
-    cat(str)
-  } else {
-    try {
-      webCat(str)
-    } catch(e) {
-      console.log(e);
+async function writeOutput(inputPath, outputPath) {
+  
+  try {
+    let input;
+    if (fs.existsSync(inputPath)) {
+      input = await cat(inputPath)
+    } else {
+      input = await webCat(inputPath);
     }
+    await fs.promises.writeFile(outputPath, input);
+    return;
+  } catch(e) {
+    console.log(e);
   }
 }
-
 
 async function printOutput(inputPath) {
   try {
@@ -39,18 +41,13 @@ async function printOutput(inputPath) {
   }
 }
 
-
 function handlePath() {
-  console.log(process.argv)
 
   if (process.argv[2] == "--out") {
     writeOutput(process.argv[4], process.argv[3]);
   } else {
     printOutput(process.argv[2])
   }
-
 }
 
 handlePath();
-
-

@@ -1,0 +1,15 @@
+{
+  "name": "node-files",
+  "version": "1.0.0",
+  "description": "Springboard asignment for unit 31.4",
+  "main": "step1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Connor Wales",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "fs": "0.0.1-security"
+  }
+}
